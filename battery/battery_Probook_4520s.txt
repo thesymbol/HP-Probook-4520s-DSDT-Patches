@@ -56,7 +56,7 @@ into device label EC0 code_regex M1CT,\s+32, replace_matched begin MCT0,8,MCT1,8
 into device label EC0 code_regex MOCT,\s+32, replace_matched begin OCT0,8,OCT1,8,OCT2,8,OCT3,8, end;
 
 # Fix 16 bit values that has been converted
-into method label _TMP code_regex \(\\\_SB.PCI0.LPCB.EC0.CBT, replaceall_matched begin (\_SB.B1B2 (\\_SB.PCI0.LPCB.EC0.CBT0, \\_SB.PCI0.LPCB.EC0.CBT1), end;
+into method label _TMP code_regex \(\\\_SB.PCI0.LPCB.EC0.CBT, replaceall_matched begin (\\_SB.B1B2 (\\_SB.PCI0.LPCB.EC0.CBT0, \\_SB.PCI0.LPCB.EC0.CBT1), end;
 into method label BTIF code_regex \(BFC, replaceall_matched begin (B1B2 (BFC0, BFC1), end;
 into method label BTIF code_regex \(BDV, replaceall_matched begin (B1B2 (BDV0, BDV1), end;
 into method label BTIF code_regex \(BSN, replaceall_matched begin (B1B2 (BSN0, BSN1), end;
@@ -83,6 +83,11 @@ into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CPWR, replaceall_matched b
 into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CVLT, replaceall_matched begin (B1B2 (^^PCI0.LPCB.EC0.VLT0, ^^PCI0.LPCB.EC0.VLT1), end;
 into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CCUR, replaceall_matched begin (B1B2 (^^PCI0.LPCB.EC0.CUR0, ^^PCI0.LPCB.EC0.CUR1), end;
 
+# Fix 16 bit for clean DSDT (fresh from ACPI)
+into method label GPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.CPWR, replaceall_matched begin (B1B2 (\\_SB.PCI0.LPCB.EC0.PWR0, \\_SB.PCI0.LPCB.EC0.PWR1), end;
+into method label GPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.CVLT, replaceall_matched begin (B1B2 (\\_SB.PCI0.LPCB.EC0.VLT0, \\_SB.PCI0.LPCB.EC0.VLT1), end;
+into method label GPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.CCUR, replaceall_matched begin (B1B2 (\\_SB.PCI0.LPCB.EC0.CUR0, \\_SB.PCI0.LPCB.EC0.CUR1), end;
+
 # Fix 32 bit values that has been converted
 into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.S0PW, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.SPW0, ^^PCI0.LPCB.EC0.SPW1, ^^PCI0.LPCB.EC0.SPW2, ^^PCI0.LPCB.EC0.SPW3), end;
 into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.S0CT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.SCT0, ^^PCI0.LPCB.EC0.SCT1, ^^PCI0.LPCB.EC0.SCT2, ^^PCI0.LPCB.EC0.SCT3), end;
@@ -90,5 +95,13 @@ into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.MOCT, replaceall_matched b
 into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.M1CT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.MCT0, ^^PCI0.LPCB.EC0.MCT1, ^^PCI0.LPCB.EC0.MCT2, ^^PCI0.LPCB.EC0.MCT3), end;
 into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.SXPW, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.XPW0, ^^PCI0.LPCB.EC0.XPW1, ^^PCI0.LPCB.EC0.XPW2, ^^PCI0.LPCB.EC0.XPW3), end;
 into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.SXCT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.XCT0, ^^PCI0.LPCB.EC0.XCT1, ^^PCI0.LPCB.EC0.XCT2, ^^PCI0.LPCB.EC0.XCT3), end;
+
+# Fix 32 bit for clean DSDT (fresh from ACPI)
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.S0PW, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.SPW0, \\_SB.PCI0.LPCB.EC0.SPW1, \\_SB.PCI0.LPCB.EC0.SPW2, \\_SB.PCI0.LPCB.EC0.SPW3), end;
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.S0CT, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.SCT0, \\_SB.PCI0.LPCB.EC0.SCT1, \\_SB.PCI0.LPCB.EC0.SCT2, \\_SB.PCI0.LPCB.EC0.SCT3), end;
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.MOCT, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.OCT0, \\_SB.PCI0.LPCB.EC0.OCT1, \\_SB.PCI0.LPCB.EC0.OCT2, \\_SB.PCI0.LPCB.EC0.OCT3), end;
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.M1CT, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.MCT0, \\_SB.PCI0.LPCB.EC0.MCT1, \\_SB.PCI0.LPCB.EC0.MCT2, \\_SB.PCI0.LPCB.EC0.MCT3), end;
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.SXPW, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.XPW0, \\_SB.PCI0.LPCB.EC0.XPW1, \\_SB.PCI0.LPCB.EC0.XPW2, \\_SB.PCI0.LPCB.EC0.XPW3), end;
+into method label HPMC code_regex \(\\\_SB.PCI0.LPCB.EC0.SXCT, replaceall_matched begin (B1B4 (\\_SB.PCI0.LPCB.EC0.XCT0, \\_SB.PCI0.LPCB.EC0.XCT1, \\_SB.PCI0.LPCB.EC0.XCT2, \\_SB.PCI0.LPCB.EC0.XCT3), end;
 
 
