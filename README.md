@@ -15,7 +15,7 @@ To add these patches to MaciASL as a repository:
 - select Sources
 - click the [+] button
 - give it a name (eg. "4520s Patches")
-- type the following URL: 
+- type the following URL: https://raw.githubusercontent.com/thesymbol/HP-Probook-4520s-DSDT-Patches/master
 
 If you don't have internet access and wish to use a repository locally:
 - download the .ZIP of the repository from github (Download ZIP button on right side)
@@ -42,5 +42,5 @@ How to apply patches with MaciASL
 - click Apply
 - when you're done applying patches, click Close
 
-To use your DSDT, you must save it to /Extra/DSDT.aml (or /EFI/CLOVER/ACPI/patched/DSDT.aml, format: ACPI Machine Language Binary
+To use your DSDT, you must save it to /Extra/DSDT.aml (or /EFI/CLOVER/ACPI/patched/DSDT.aml if you are using Clover), format: ACPI Machine Language Binary
 After saving it, reboot and test. Boot with DSDT=null if there is an issue with your DSDT that prevents you from booting.
