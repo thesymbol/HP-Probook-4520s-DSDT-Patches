@@ -1,5 +1,5 @@
 HP Probook 4520s DSDT Patches
-===
+===============
 This is a set of patches for the HP Probook 4520s for running OS X
 Credit to RehabMan for almost all patches.
 You can find RehabMans repository here: https://github.com/RehabMan/Laptop-DSDT-Patch
@@ -8,7 +8,7 @@ RehabMan recommend that you use his version of MaciASL for this type of patches:
 https://github.com/RehabMan/OS-X-MaciASL-patchmatic
 
 How to add repository to MaciASL
-===
+-------------------------
 To add these patches to MaciASL as a repository:
 - Run MaciASL
 - choose Preferences from the MaciASL menu bar
@@ -26,7 +26,7 @@ If you don't have internet access and wish to use a repository locally:
 After that you can use the repo just like a remote repo.
 
 How to apply patches with MaciASL
-===
+-------------------------
 - run MaciASL
 - if you already have a patched DSDT in /Extra, MaciASL will load it 
   (caption will say DSDT.AML)
