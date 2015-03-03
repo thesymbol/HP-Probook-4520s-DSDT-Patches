@@ -20,3 +20,7 @@ begin If (LOr (_OSI ("Darwin"), _OSI ("Windows 2001 SP2"))) end;
 # extra backslashes
 into method label _INI parent_label \_SB code_regex If\s+\(\\_OSI\s+\(\"Windows\s2001\sSP2\"\)\) replace_matched
 begin If (LOr (_OSI ("Darwin"), _OSI ("Windows 2001 SP2"))) end;
+# Clean DSDT
+into method label _INI parent_label \_SB code_regex If\s+\(\_OSI\s+\(\"Windows\s2001\sSP2\"\)\) replace_matched
+begin If (LOr (_OSI ("Darwin"), _OSI ("Windows 2001 SP2"))) end;
+
