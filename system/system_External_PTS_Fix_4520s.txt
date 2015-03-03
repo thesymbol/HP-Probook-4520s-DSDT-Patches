@@ -1,0 +1,18 @@
+#system_External_PTS_Fix_4520s.txt
+
+# Created by: thesymbol
+# This fix eliminates possible external access on the HP Probook 4520s
+#
+
+into method label PSL code_regex ([\s\S]*) replace_matched
+begin
+If (CondRefOf (CFGD)) {\n
+    %1\n
+    }\n
+    Else\n
+    {\n        Return (Package (0x01) {\n
+            \\_PR.CPU0\n
+        })\n    }\n
+end;
+
+

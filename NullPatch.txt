@@ -1,4 +1,3 @@
-#Maintained by: RehabMan for: HP Probook
-#NullPatch.txt
+﻿# NullPatch.txt
 
 # This is not a patch....

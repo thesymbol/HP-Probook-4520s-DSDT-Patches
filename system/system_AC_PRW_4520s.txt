@@ -1,0 +1,21 @@
+#system_AC_PRW_4520s.txt
+
+# Created by: thesymbol
+# Inserts Power Resources for wake
+into method label _PSR code_regex Return\s+\(Local\d+\) replace_matched
+begin
+\tReturn (Local0)\n
+}\n
+Name (_PRW, Package (0x02) // _PRW: Power Resources for wake\n
+{ 0x18, 0x03
+end;
+
+# Replace the ending brackets
+into device label AC code_regex \{\s0x18,\s+0x03\s+\} replace_matched
+begin
+{\n
+    0x18,\n
+    0x03\n
+})\n
+end;
+

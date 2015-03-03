@@ -127,9 +127,6 @@ Device (PNLF)\n
     }\n
     Method (_DOS, 1, NotSerialized)\n
     {\n
-        // Note: Some systems have this defined in DSDT, so uncomment\n
-        // the next line if that is the case.\n
-        //External(^^_DOS, MethodObj)\n
         ^^_DOS(Arg0)\n
     }\n
     // extended _BCM/_BQC for setting "in between" levels\n
@@ -185,4 +182,3 @@ Device (PNLF)\n
     })\n
 }\n
 end;
-

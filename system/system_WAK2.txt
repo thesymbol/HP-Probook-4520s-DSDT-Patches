@@ -28,4 +28,3 @@ begin
 If (LOr(LLess(Arg0,1),LGreater(Arg0,5))) { Store(3,Arg0) }\n
 %1
 end;
-

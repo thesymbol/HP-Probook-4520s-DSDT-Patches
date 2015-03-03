@@ -1,0 +1,13 @@
+#system_S3D_4520s.txt
+
+# Created by: thesymbol
+# Might help fixing sleep problems on HP Probook 4520s
+#
+
+# Replace _S3D 0x02 with 0x03 in EHC1
+into device label EHC1 code_regex Name\s+\(_S3D,\s0x02\) replace_matched
+begin Name (_S3D, 0x03) end;
+
+# Replace _S3D 0x02 with 0x03 in EHC2
+into device label EHC2 code_regex Name\s+\(_S3D,\s0x02\) replace_matched
+begin Name (_S3D, 0x03) end;

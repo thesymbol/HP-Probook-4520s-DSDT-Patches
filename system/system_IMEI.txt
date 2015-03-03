@@ -11,4 +11,3 @@ Device (IMEI)\n
     Name (_ADR, 0x00160000)\n
 }\n
 end;
-

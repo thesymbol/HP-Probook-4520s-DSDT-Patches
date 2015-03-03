@@ -1,0 +1,94 @@
+# battery_Probook_4520s.txt
+
+# Based on code by: RehabMan Modified by: thesymbol
+# Fixes battery indicator on HP Probook 4520s
+#
+
+# For 16 bit that has been converted to 8 bit
+into method label B1B2 remove_entry;
+into definitionblock code_regex . insert
+begin
+Method (B1B2, 2, NotSerialized) { Return(Or(Arg0, ShiftLeft(Arg1, 8))) }\n
+end;
+
+# For 32 bit that has been converted to 8 bit
+into method label B1B4 remove_entry;
+into definitionblock code_regex . insert
+begin
+Method (B1B4, 4, NotSerialized)\n
+{\n
+    Store(Arg3, Local0)\n
+    Or(Arg2, ShiftLeft(Local0, 8), Local0)\n
+    Or(Arg1, ShiftLeft(Local0, 8), Local0)\n
+    Or(Arg0, ShiftLeft(Local0, 8), Local0)\n
+    Return(Local0)\n
+}\n
+end;
+
+# 16 bit conversion to 8 bit
+into device label EC0 code_regex CPWR,\s+16, replace_matched begin PWR0,8,PWR1,8, end;
+into device label EC0 code_regex CVLT,\s+16, replace_matched begin VLT0,8,VLT1,8, end;
+into device label EC0 code_regex CCUR,\s+16, replace_matched begin CUR0,8,CUR1,8, end;
+into device label EC0 code_regex BDC,\s+16, replace_matched begin BDC0,8,BDC1,8, end;
+into device label EC0 code_regex BFC,\s+16, replace_matched begin BFC0,8,BFC1,8, end;
+into device label EC0 code_regex BME,\s+16, replace_matched begin BME0,8,BME1,8, end;
+into device label EC0 code_regex BDV,\s+16, replace_matched begin BDV0,8,BDV1,8, end;
+into device label EC0 code_regex BCV1,\s+16, replace_matched begin CV10,8,CV11,8, end;
+into device label EC0 code_regex BPR,\s+16, replace_matched begin BPR0,8,BPR1,8, end;
+into device label EC0 code_regex BCR,\s+16, replace_matched begin BCR0,8,BCR1,8, end;
+into device label EC0 code_regex BRC,\s+16, replace_matched begin BRC0,8,BRC1,8, end;
+into device label EC0 code_regex BCC,\s+16, replace_matched begin BCC0,8,BCC1,8, end;
+into device label EC0 code_regex BPV,\s+16, replace_matched begin BPV0,8,BPV1,8, end;
+into device label EC0 code_regex BCV2,\s+16, replace_matched begin CV20,8,CV21,8, end;
+into device label EC0 code_regex BCV3,\s+16, replace_matched begin CV30,8,CV31,8, end;
+into device label EC0 code_regex BCV4,\s+16, replace_matched begin CV40,8,CV41,8, end;
+into device label EC0 code_regex BSTS,\s+16, replace_matched begin STS0,8,STS1,8, end;
+into device label EC0 code_regex BSN,\s+16, replace_matched begin BSN0,8,BSN1,8, end;
+into device label EC0 code_regex BDAT,\s+16, replace_matched begin DAT0,8,DAT1,8, end;
+into device label EC0 code_regex CBT,\s+16, replace_matched begin CBT0,8,CBT1,8, end;
+
+# 32 bit conversion to 8 bit
+into device label EC0 code_regex S0PW,\s+32, replace_matched begin SPW0,8,SPW1,8,SPW2,8,SPW3,8, end;
+into device label EC0 code_regex S0CT,\s+32, replace_matched begin SCT0,8,SCT1,8,SCT2,8,SCT3,8, end;
+into device label EC0 code_regex SXPW,\s+32, replace_matched begin XPW0,8,XPW1,8,XPW2,8,XPW3,8, end;
+into device label EC0 code_regex SXCT,\s+32, replace_matched begin XCT0,8,XCT1,8,XCT2,8,XCT3,8, end;
+into device label EC0 code_regex M1CT,\s+32, replace_matched begin MCT0,8,MCT1,8,MCT2,8,MCT3,8, end;
+into device label EC0 code_regex MOCT,\s+32, replace_matched begin OCT0,8,OCT1,8,OCT2,8,OCT3,8, end;
+
+# Fix 16 bit values that has been converted
+into method label _TMP code_regex \(\\\_SB.PCI0.LPCB.EC0.CBT, replaceall_matched begin (\_SB.B1B2 (\\_SB.PCI0.LPCB.EC0.CBT0, \\_SB.PCI0.LPCB.EC0.CBT1), end;
+into method label BTIF code_regex \(BFC, replaceall_matched begin (B1B2 (BFC0, BFC1), end;
+into method label BTIF code_regex \(BDV, replaceall_matched begin (B1B2 (BDV0, BDV1), end;
+into method label BTIF code_regex \(BSN, replaceall_matched begin (B1B2 (BSN0, BSN1), end;
+into method label BTIF code_regex \(BDAT, replaceall_matched begin (B1B2 (DAT0, DAT1), end;
+into method label BTST code_regex \(BPR, replaceall_matched begin (B1B2 (BPR0, BPR1), end;
+into method label BTST code_regex \(BRC, replaceall_matched begin (B1B2 (BRC0, BRC1), end;
+into method label BTST code_regex \(BPV, replaceall_matched begin (B1B2 (BPV0, BPV1), end;
+into method label GBTI code_regex \(BDC, replaceall_matched begin (B1B2 (BDC0, BDC1), end;
+into method label GBTI code_regex \(BFC, replaceall_matched begin (B1B2 (BFC0, BFC1), end;
+into method label GBTI code_regex \(BRC, replaceall_matched begin (B1B2 (BRC0, BRC1), end;
+into method label GBTI code_regex \(BME, replaceall_matched begin (B1B2 (BME0, BME1), end;
+into method label GBTI code_regex \(BCC, replaceall_matched begin (B1B2 (BCC0, BCC1), end;
+into method label GBTI code_regex \(CBT, replaceall_matched begin (B1B2 (CBT0, CBT1), end;
+into method label GBTI code_regex \(BPV, replaceall_matched begin (B1B2 (BPV0, BPV1), end;
+into method label GBTI code_regex \(BCR, replaceall_matched begin (B1B2 (BCR0, BCR1), end;
+into method label GBTI code_regex \(BDV, replaceall_matched begin (B1B2 (BDV0, BDV1), end;
+into method label GBTI code_regex \(BSTS, replaceall_matched begin (B1B2 (STS0, STS1), end;
+into method label GBTI code_regex \(BCV1, replaceall_matched begin (B1B2 (CV10, CV11), end;
+into method label GBTI code_regex \(BCV2, replaceall_matched begin (B1B2 (CV20, CV21), end;
+into method label GBTI code_regex \(BCV3, replaceall_matched begin (B1B2 (CV30, CV31), end;
+into method label GBTI code_regex \(BCV4, replaceall_matched begin (B1B2 (CV40, CV41), end;
+into method label GBTI code_regex \(BSN,\s+BDAT\), replaceall_matched begin (B1B2 (BSN0, BSN1), B1B2 (DAT0, DAT1)), end;
+into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CPWR, replaceall_matched begin (B1B2 (^^PCI0.LPCB.EC0.PWR0, ^^PCI0.LPCB.EC0.PWR1), end;
+into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CVLT, replaceall_matched begin (B1B2 (^^PCI0.LPCB.EC0.VLT0, ^^PCI0.LPCB.EC0.VLT1), end;
+into method label GPMC code_regex \(\^\^PCI0.LPCB.EC0.CCUR, replaceall_matched begin (B1B2 (^^PCI0.LPCB.EC0.CUR0, ^^PCI0.LPCB.EC0.CUR1), end;
+
+# Fix 32 bit values that has been converted
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.S0PW, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.SPW0, ^^PCI0.LPCB.EC0.SPW1, ^^PCI0.LPCB.EC0.SPW2, ^^PCI0.LPCB.EC0.SPW3), end;
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.S0CT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.SCT0, ^^PCI0.LPCB.EC0.SCT1, ^^PCI0.LPCB.EC0.SCT2, ^^PCI0.LPCB.EC0.SCT3), end;
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.MOCT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.OCT0, ^^PCI0.LPCB.EC0.OCT1, ^^PCI0.LPCB.EC0.OCT2, ^^PCI0.LPCB.EC0.OCT3), end;
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.M1CT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.MCT0, ^^PCI0.LPCB.EC0.MCT1, ^^PCI0.LPCB.EC0.MCT2, ^^PCI0.LPCB.EC0.MCT3), end;
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.SXPW, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.XPW0, ^^PCI0.LPCB.EC0.XPW1, ^^PCI0.LPCB.EC0.XPW2, ^^PCI0.LPCB.EC0.XPW3), end;
+into method label HPMC code_regex \(\^\^PCI0.LPCB.EC0.SXCT, replaceall_matched begin (B1B4 (^^PCI0.LPCB.EC0.XCT0, ^^PCI0.LPCB.EC0.XCT1, ^^PCI0.LPCB.EC0.XCT2, ^^PCI0.LPCB.EC0.XCT3), end;
+
+
